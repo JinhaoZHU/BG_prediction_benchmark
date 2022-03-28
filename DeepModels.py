@@ -759,125 +759,6 @@ def recurrent_multistep(data_type, patient, model, model_path, history_minutes=6
                                                                                                 test_mape, test_mae))
     return [rmse_loss, mape_loss, mae_loss] + detail
 
-
-# import pandas as pd
-#
-# data_type = 'hospital_data'
-# dataset = f'data/{data_type}'
-# for patient in os.listdir(dataset):
-#     print(patient)
-#     patient = patient.split('.')[0]
-#     model = 'SeqMo'
-#     save_path = f'result/multi_step/{data_type}/{patient}/{model}.csv'
-#     if not os.path.exists(os.path.dirname(save_path)):
-#         os.makedirs(os.path.dirname(save_path))
-#
-#     if os.path.exists(save_path):
-#         continue
-#     print(os.path.dirname(save_path))
-#     res = multi_step_direct(data_type, patient, model)
-#     res = pd.DataFrame(res, index=['rmse', 'mape', 'mae'])
-#     res.to_csv(f'result/multi_step/{data_type}/{patient}/{model}.csv')
-#
-#
-# import pandas as pd
-# import os
-#
-# data_type = 'simulator_data'
-# dataset = f'data/{data_type}'
-# for patient in os.listdir(dataset):
-#     print(patient)
-#     patient = patient.split('.')[0]
-#     model = 'SeqMo'
-#     save_path = f'result/multi_step/{data_type}/{patient}/{model}.csv'
-#     if not os.path.exists(os.path.dirname(save_path)):
-#         os.makedirs(os.path.dirname(save_path))
-#
-#     if os.path.exists(save_path):
-#         continue
-#     print(os.path.dirname(save_path))
-#     res = multi_step_direct(data_type, patient, model, suffix='pkl')
-#     res = pd.DataFrame(res, index=['rmse', 'mape', 'mae'])
-#     res.to_csv(f'result/multi_step/{data_type}/{patient}/{model}.csv')
-#
-# # %%
-#
-# # 俄亥俄数据
-# import pandas as pd
-# import os
-#
-# data_type = 'ohio_data'
-# dataset = f'data/{data_type}'
-# for patient in [540, 544, 552, 567, 584, 596]:
-#     print(patient)
-#     model = 'SeqMo'
-#     save_path = f'result/multi_step/{data_type}/{patient}/{model}.csv'
-#     if not os.path.exists(os.path.dirname(save_path)):
-#         os.makedirs(os.path.dirname(save_path))
-#
-#     if os.path.exists(save_path):
-#         continue
-#     print(os.path.dirname(save_path))
-#     res = multi_step_direct(data_type, patient, model, suffix='pkl')
-#     res = pd.DataFrame(res, index=['rmse', 'mape', 'mae'])
-#     res.to_csv(f'result/multi_step/{data_type}/{patient}/{model}.csv')
-#
-# # import pandas as pd
-# #
-# # data_type = 'hospital_data'
-# # dataset = f'data/{data_type}'
-# # for patient in os.listdir(dataset):
-# #     print(patient)
-# #     patient = patient.split('.')[0]
-# #
-# #     model = 'GRU_Attention'
-# #     res = multi_step_direct(data_type, patient, model)
-# #     res = pd.DataFrame(res, index=['rmse', 'mape', 'mae'])
-# #     res.to_csv(f'result/multi_step/{data_type}/{patient}/{model}.csv')
-# # %%
-#
-# import pandas as pd
-# import os
-#
-# data_type = 'simulator_data'
-# dataset = f'data/{data_type}'
-# for patient in os.listdir(dataset):
-#     print(patient)
-#     patient = patient.split('.')[0]
-#     model = 'GRU_Attention'
-#     save_path = f'result/multi_step/{data_type}/{patient}/{model}.csv'
-#     if not os.path.exists(os.path.dirname(save_path)):
-#         os.makedirs(os.path.dirname(save_path))
-#
-#     if os.path.exists(save_path):
-#         continue
-#     print(os.path.dirname(save_path))
-#     res = multi_step_direct(data_type, patient, model, suffix='pkl')
-#     res = pd.DataFrame(res, index=['rmse', 'mape', 'mae'])
-#     res.to_csv(f'result/multi_step/{data_type}/{patient}/{model}.csv')
-#
-# # %%
-#
-# # 俄亥俄数据
-# import pandas as pd
-# import os
-#
-# data_type = 'ohio_data'
-# dataset = f'data/{data_type}'
-# for patient in [540, 544, 552, 567, 584, 596]:
-#     print(patient)
-#     model = 'GRU_Attention'
-#     save_path = f'result/multi_step/{data_type}/{patient}/{model}.csv'
-#     if not os.path.exists(os.path.dirname(save_path)):
-#         os.makedirs(os.path.dirname(save_path))
-#
-#     if os.path.exists(save_path):
-#         continue
-#     print(os.path.dirname(save_path))
-#     res = multi_step_direct(data_type, patient, model, suffix='pkl')
-#     res = pd.DataFrame(res, index=['rmse', 'mape', 'mae'])
-#     res.to_csv(f'result/multi_step/{data_type}/{patient}/{model}.csv')
-
 def recurrent_step_train(data_type, model='GRU', epoch=300, time_interval=5, is_train=True, use_all=False,
                          exclusive=False, history_minutes=60,
                          use_meal=False, normalize=0, use_insulin=False, resampling=False):
@@ -1122,145 +1003,21 @@ def multi_transfer_train(data_type, model, val_data_type, prediction_type, epoch
 
 
 if __name__ == '__main__':
-    # one_step_train('hospital_data', 'GRU_Attention', [1, 2, 4, 6], 15, is_train=False)
-    #
-    # one_step_train('ohio_data', 'GRU', [1, 6, 12, 18], 5, is_train=True, epoch=1000, history_minutes=60, use_meal=False,
-    #                normalize=0, use_insulin=False)
-    # one_step_train('hospital_data', 'GRU', [1, 2, 4, 6], 15, is_train=True, epoch=1000, history_minutes=60, use_meal=False,
-    #                normalize=0, use_insulin=False)
-    # one_step_train('EastT1DM', 'GRU', [1, 2, 4, 6], 15, is_train=True, epoch=1000, history_minutes=60, use_meal=False,
-    #                normalize=0, use_insulin=False)
-
-    # # one_step_train('ohio_data', 'GRU_Attention', [1, 6, 12, 18], 5, is_train=False)
-
-    # # one_step_train('simulator_data', 'GRU_Attention', [1, 6, 12, 18], 5, is_train=False)
-    # one_step_train('simulator_data', 'GRU', [1, 6, 12, 18], 5, is_train=True, epoch=1000, history_minutes=60,
-    #                use_all=True, use_meal=False, normalize=0, use_insulin=False)
-    # one_step_train('ohio_data', 'GRU', [1, 6, 12, 18], 5, is_train=True, epoch=1000, history_minutes=60, use_all=True,
-    #                use_meal=False, normalize=0, use_insulin=False)
-    # recurrent_step_train("simulator_data", "GRU", epoch=1000,resampling=True)
-    # recurrent_step_train("ohio_data", "GRU", epoch=1000,resampling=True)
-    # recurrent_step_train("simulator_data", "GRU", epoch=1000,resampling=True,use_all=True)
-    # recurrent_step_train("ohio_data", "GRU", epoch=1000,resampling=True,use_all=True)
-    # recurrent_step_train("simulator_data", "GRU", epoch=1000,resampling=True,use_meal=True)
-    # recurrent_step_train("ohio_data", "GRU", epoch=1000,resampling=True,use_meal=True)
-    # recurrent_step_train("ohio_data", "GRU", epoch=1000)
-    # recurrent_step_train("EastT1DM", "GRU",is_train=True, epoch=1000)
-    # recurrent_step_train("hospital_data", "GRU", epoch=1000)
-
-    # recurrent_step("hospital_data","SeqMo")
-    # recurrent_step("simulator_data","SeqMo")
-    # recurrent_step_ohio("ohio_data","SeqMo")
-    #
-    # recurrent_step("hospital_data","GRU_Attention")
-    # recurrent_step("simulator_data","GRU_Attention")
-    # recurrent_step_ohio("ohio_data","GRU_Attention")
-
-    # # # ----------------------------------------------
-
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True,history_minutes=60)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=True,history_minutes=60)
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,history_minutes=60)
-    # multi_step_train("EastT1DM", 'GRU', epoch=1000, is_train=True,history_minutes=60)
 
 
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)    # 已跑完
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)         # 已跑完
-    # multi_step_train("EastT1DM", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)          # 已跑完
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)     # 已跑完
+    multi_step_train("ShanghaiT1DM", 'GRU', epoch=1000, is_train=True, use_all=True)
+    multi_step_train("ShanghaiT2DM", 'GRU', epoch=1000, is_train=True, use_all=True)
 
-    # recurrent_step_train("simulator_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)    # 已跑完
-    # recurrent_step_train("ohio_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)         # 已跑完
-    # recurrent_step_train("EastT1DM", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)          # 已跑完
-    # recurrent_step_train("hospital_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=True)     # 已跑完
+    recurrent_step_train("ShanghaiT1DM", 'GRU', epoch=1000, is_train=True, use_all=True)
+    recurrent_step_train("ShanghaiT2DM", 'GRU', epoch=1000, is_train=True, use_all=True)
 
-
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True,use_all=True,exclusive=False)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=False)
-    # multi_step_train("EastT1DM", 'GRU', epoch=1000, is_train=True,use_all=True,exclusive=False)
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,use_all=True,exclusive=False)
-
-    # recurrent_step_train("simulator_data", 'GRU', epoch=1000, is_train=True,use_all=True,exclusive=False)
-    # recurrent_step_train("ohio_data", 'GRU', epoch=1000, is_train=True, use_all=True, exclusive=False)
-    # recurrent_step_train("EastT1DM", 'GRU', epoch=1000, is_train=True,use_all=True,exclusive=False)
-    # recurrent_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,use_all=True,exclusive=False)
-
-    # multi_step_train("simulator_data",'SeqMo',epoch=1000,is_train=True)
-    # multi_step_train("ohio_data",'SeqMo',epoch=1000,is_train=False)
-    # multi_step_train("hospital_data",'SeqMo',epoch=1000,is_train=True)
-    #
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=False,history_minutes=240)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=False,history_minutes=240) # 已重新跑
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,history_minutes=240)
-    #
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True,history_minutes=480)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=False,history_minutes=480) # 已重新跑
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,history_minutes=480)
-    #
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True,history_minutes=720)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=False,history_minutes=720) # 已重新跑
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,history_minutes=720)
-    #
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True,history_minutes=1440)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=False,history_minutes=1440) # 已重新跑
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,history_minutes=1440)
-
-    # multi_step_train("simulator_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=240)
-    # multi_step_train("ohio_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=240)
-    # multi_step_train("hospital_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=240)
-    #
-    # multi_step_train("simulator_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=480)
-    # multi_step_train("ohio_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=480)
-    # multi_step_train("hospital_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=480)
-
-    # multi_step_train("simulator_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=720)
-    # multi_step_train("ohio_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=720)
-    # multi_step_train("hospital_data", 'SeqMo', epoch=1000, is_train=True,history_minutes=720)
-
-    # multi_step_train("simulator_data", 'SeqMo', epoch=1000, is_train=True, history_minutes=1440)
-    # multi_step_train("ohio_data", 'SeqMo', epoch=1000, is_train=True, history_minutes=1440)
-    # multi_step_train("hospital_data", 'SeqMo', epoch=1000, is_train=True, history_minutes=1440)
-
-    # import GAN_trqain
-    # GAN_trqain.multi_step_train('simulator_data','GAN',time_step=[6,12,18],time_interval=5,epoch=1000)
-    # GAN_trqain.multi_step_train('ohio_data','GAN',time_step=[6,12,18],time_interval=5,epoch=1000)
-    # GAN_trqain.multi_step_train('hospital_data','GAN',time_step=[6,12,18],time_interval=5,epoch=1000)
-    #
     import Seq2Seq_train as Seq2Seq_train
 
-    # Seq2Seq_train.multi_step_train('hospital_data', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=60)
-    # Seq2Seq_train.multi_step_train('EastT1DM', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=60)  #已run
-    # Seq2Seq_train.multi_step_train('ohio_data', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=60) # 已重新跑
-    # Seq2Seq_train.multi_step_train('simulator_data', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=60)
-    #
-    # Seq2Seq_train.multi_step_train('hospital_data', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=240)
-    # Seq2Seq_train.multi_step_train('ohio_data', 'Seq2Seq', epoch=1000, is_train=False, history_minutes=240) # 已重新跑
-    # Seq2Seq_train.multi_step_train('simulator_data', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=240)
-    #
-    # Seq2Seq_train.multi_step_train('hospital_data', 'Seq2Seq_Attention', epoch=1000, is_train=True, history_minutes=60)
-    # Seq2Seq_train.multi_step_train('EastT1DM', 'Seq2Seq_Attention', epoch=1000, is_train=True, history_minutes=60) # 已经run
-    # Seq2Seq_train.multi_step_train('ohio_data', 'Seq2Seq_Attention', epoch=1000, is_train=True, history_minutes=60) # 已重新跑
-    # Seq2Seq_train.multi_step_train('simulator_data', 'Seq2Seq_Attention', epoch=1000, is_train=True, history_minutes=60)
-    #
-    # Seq2Seq_train.multi_step_train('hospital_data', 'Seq2Seq_Attention', epoch=1000, is_train=True, history_minutes=240)
-    # Seq2Seq_train.multi_step_train('ohio_data', 'Seq2Seq_Attention', epoch=1000, is_train=False, history_minutes=240) # 已重新跑
-    # Seq2Seq_train.multi_step_train('simulator_data', 'Seq2Seq_Attention', epoch=1000, is_train=True, history_minutes=240)
+    Seq2Seq_train.multi_step_train('ShanghaiT2DM', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=60)
+    Seq2Seq_train.multi_step_train('ShanghaiT1DM', 'Seq2Seq', epoch=1000, is_train=True, history_minutes=60)
 
-    # multi_step_train("simulator_data", 'SeqMo', epoch=1000, is_train=True, history_minutes=60) # 已重新跑
-    # multi_step_train("ohio_data", 'SeqMo', epoch=1000, is_train=True, history_minutes=60) # 已重新跑
-    # multi_step_train("hospital_data", 'SeqMo', epoch=1000, is_train=True, history_minutes=60) # 已重新跑
-
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True, history_minutes=60, use_meal=True, normalize=2)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=True,history_minutes=60,use_meal=True,normalize=2)
-    # multi_step_train("EastT1DM", 'GRU', epoch=1000, is_train=True, history_minutes=60, use_meal=True, normalize=2)
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True, history_minutes=60, use_meal=True, normalize=2)
-
-    # multi_step_train("simulator_data", 'GRU', epoch=1000, is_train=True, history_minutes=60, use_meal=True, normalize=0)
-    # multi_step_train("ohio_data", 'GRU', epoch=1000, is_train=True,history_minutes=60,use_meal=True,normalize=0)
-    # multi_step_train("hospital_data", 'GRU', epoch=1000, is_train=True,history_minutes=60,use_meal=True)
-
-
-    # 迁移效果
+    multi_step_train("ShanghaiT1DM", 'GRU', epoch=1000, is_train=True, history_minutes=60, use_meal=True, normalize=2)
+    multi_step_train("ShanghaiT2DM", 'GRU', epoch=1000, is_train=True, history_minutes=60, use_meal=True, normalize=2)
 
     # downsampling
     # Transfer ShanghaiT1DM trained model to ShanghaiT2DM, downsampling is used for datasets whose time ineterval is 5 minute.

@@ -7,3 +7,6 @@ in the github repository: https://github.com/jxx123/simglucose. OhioT1DM is avai
 - `model` includes the classical models and deep learning models that used in this paper.
 - `predictability` includes the code about predictability.
 - `util` includes utility class.
+
+### Todo
+- 将患者的汇总信息加入到data中
